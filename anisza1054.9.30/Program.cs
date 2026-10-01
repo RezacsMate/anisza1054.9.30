@@ -1,4 +1,6 @@
-﻿namespace anisza1054._9._30
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace anisza1054._9._30
 {
     internal class Program
     {
@@ -68,10 +70,91 @@
             }
             InCity("Budapest").ForEach(x => Console.WriteLine(x));
             Console.WriteLine("--------------");
+            List<Laptop> laptops = new List<Laptop>()
+{
+    new Laptop("Lenovo", "ThinkPad E14", "Intel i5"){Memory= 16 },
+    new Laptop("Apple", "MacBook Air M3", "Apple M3") { Memory = 16 },
+    new Laptop("Asus", "ROG Strix G16", "Intel i7") { Memory = 32 },
+    new Laptop("Acer", "Aspire 5", "AMD Ryzen 5") { Memory = 16 },
+    new Laptop("HP", "ProBook 450", "Intel i5") { Memory = 16 },
+    new Laptop("Dell", "Inspiron 15", "Intel i7") { Memory = 32 },
+    new Laptop("Lenovo", "IdeaPad Slim 3", "AMD Ryzen 5") { Memory = 8 },
+    new Laptop("Asus", "VivoBook 15", "Intel i5") { Memory = 8 },
+    new Laptop("Apple", "MacBook Pro M3", "Apple M3 Pro") { Memory = 36 },
+    new Laptop("Acer", "Nitro 5", "Intel i7") { Memory = 32 }
+};
+            laptops[0].SetPrice(319000);
+            laptops[1].SetPrice(489000);
+            laptops[2].SetPrice(649000);
+            laptops[3].SetPrice(279000);
+            laptops[4].SetPrice(349000);
+            laptops[5].SetPrice(399000);
+            laptops[6].SetPrice(249000);
+            laptops[7].SetPrice(289000);
+            laptops[8].SetPrice(799000);
+            laptops[9].SetPrice(519000);
             Console.WriteLine("--------------");
+            Console.WriteLine(laptops.Average(x=>x.GetPrice()));
+            laptops.Where(x=>x.GetPrice()< laptops.Average(x => x.GetPrice())).Select(x=>x.Model).ToList().ForEach(x=> Console.WriteLine(x));
+            List<string> getModels(int minimemory, int maxPrice) 
+            {
+                return laptops.Where(x=>x.GetPrice()<= maxPrice && x.Memory >= minimemory).Select(x=>x.Model).ToList();            
+            }
+            getModels(16, 4000000).ForEach(x => Console.WriteLine(x));
             Console.WriteLine("--------------");
+            laptops.OrderByDescending(x=>x.Memory).Select(x=>x.Model).First();
+            Console.WriteLine(laptops.OrderByDescending(x => x.Memory).Select(x => x.Model).First()
+);
             Console.WriteLine("--------------");
+            List<Restaurant> restaurants = new List<Restaurant>()
+{
+    new Restaurant("Bella Italia", "Budapest", "Italian"),
+    new Restaurant("Burger House", "Budapest", "Burger"),
+    new Restaurant("Sakura", "Budapest", "Japanese"),
+    new Restaurant("Pasta Roma", "Rome", "Italian"),
+    new Restaurant("Tokyo Garden", "Vienna", "Japanese"),
+    new Restaurant("Steak Corner", "Budapest", "Steak"),
+    new Restaurant("Pizza Napoli", "Rome", "Italian"),
+    new Restaurant("Grill House", "Vienna", "Steak"),
+    new Restaurant("Sushi World", "Prague", "Japanese"),
+    new Restaurant("Street Burger", "Prague", "Burger")
+};
+            restaurants[0].SetPrice(8500);
+            restaurants[1].SetPrice(5500);
+            restaurants[2].SetPrice(12000);
+            restaurants[3].SetPrice(9500);
+            restaurants[4].SetPrice(13500);
+            restaurants[5].SetPrice(15000);
+            restaurants[6].SetPrice(7000);
+            restaurants[7].SetPrice(14000);
+            restaurants[8].SetPrice(11000);
+            restaurants[9].SetPrice(5000);
+            restaurants[0].setRating(9.1);
+            restaurants[0].setRating(8.4);
+            restaurants[0].setRating(9.4);
+            restaurants[0].setRating(8.9);
+            restaurants[0].setRating(9.2);
+            restaurants[0].setRating(9.0);
+            restaurants[0].setRating(8.7);
+            restaurants[0].setRating(8.8);
+            restaurants[0].setRating(9.3);
+            restaurants[0].setRating(8.2);
+            // Készíts egy függvényt, amely paraméterként kap egy kategóriát,
+            // és visszaadja az adott kategóriába tartozó éttermek Name értékét!
+            List<string> asd(string newCategory) 
+            {
+                return restaurants.Where(x => x.Category == newCategory).Select(x => x.Name).ToList();
+            }
+            asd("Burger").ForEach(x => Console.WriteLine(x));
+            // LINQ segítségével számold meg, hány legalább 9.0 értékelésű étterem található a listában!
+            Console.WriteLine(restaurants.Where(x=>x.Getrating()>= 9.0).Count());
+            // LINQ segítségével keresd meg a legdrágább éttermet,
+            // és add vissza annak Name értékét!
+            restaurants.OrderByDescending(x => x.p());
+            // LINQ segítségével add vissza a különböző városok neveit!
+            // Egy város csak egyszer szerepeljen az eredményben!
             Console.WriteLine("--------------");
+
             Console.WriteLine("--------------");
             Console.WriteLine("--------------");
             Console.WriteLine("--------------");
