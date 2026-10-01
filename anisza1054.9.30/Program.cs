@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using System.Xml.Schema;
 
 namespace anisza1054._9._30
 {
@@ -16,7 +17,7 @@ namespace anisza1054._9._30
     new Smartphone("Samsung", "Galaxy A55", 2024) { _rating = 8.6 },
     new Smartphone("OnePlus", "OnePlus 12", 2024) { _rating = 8.9 },
     new Smartphone("Apple", "iPhone 14", 2022) { _rating = 8.8 },
-    new Smartphone("Xiaomi", "Xiaomi 14", 2024) { _rating = 9.2 }   
+    new Smartphone("Xiaomi", "Xiaomi 14", 2024) { _rating = 9.2 }
 };
             smartphones[0].SetPrivce(329000);
             smartphones[1].SetPrivce(349000);
@@ -31,15 +32,15 @@ namespace anisza1054._9._30
             smartphones.Where(x => x.GetReleasYear() == 2024).Select(x => x.Model).ToList().ForEach(x => Console.WriteLine(x));
             Console.WriteLine("--------------");
             Console.WriteLine(smartphones.OrderByDescending(x => x._rating).Select(x => x.Model).First().ToList());
-            
+
 
             Console.WriteLine("--------------");
             int CountBrand(string brand)
-        {
+            {
                 return smartphones.Where(x => x.Brand == brand).Count();
-        }
+            }
             Console.WriteLine(CountBrand("samsung"));
-        Console.WriteLine("--------------");
+            Console.WriteLine("--------------");
 
 
             List<Hotel> hotels = new List<Hotel>()
@@ -62,11 +63,11 @@ namespace anisza1054._9._30
             hotels[7].SetPricePerNight(75000);
             hotels[8].SetPricePerNight(49000);
             Console.WriteLine(hotels.OrderBy(x => x.SummPrice(1)).Select(x => x.Name).First());
-            
+
             Console.WriteLine("--------------");
-            List<string> InCity(string city) 
+            List<string> InCity(string city)
             {
-                return hotels.Where(x=>x.City == city).Select(x => x.Name).ToList();
+                return hotels.Where(x => x.City == city).Select(x => x.Name).ToList();
             }
             InCity("Budapest").ForEach(x => Console.WriteLine(x));
             Console.WriteLine("--------------");
@@ -94,15 +95,15 @@ namespace anisza1054._9._30
             laptops[8].SetPrice(799000);
             laptops[9].SetPrice(519000);
             Console.WriteLine("--------------");
-            Console.WriteLine(laptops.Average(x=>x.GetPrice()));
-            laptops.Where(x=>x.GetPrice()< laptops.Average(x => x.GetPrice())).Select(x=>x.Model).ToList().ForEach(x=> Console.WriteLine(x));
-            List<string> getModels(int minimemory, int maxPrice) 
+            Console.WriteLine(laptops.Average(x => x.GetPrice()));
+            laptops.Where(x => x.GetPrice() < laptops.Average(x => x.GetPrice())).Select(x => x.Model).ToList().ForEach(x => Console.WriteLine(x));
+            List<string> getModels(int minimemory, int maxPrice)
             {
-                return laptops.Where(x=>x.GetPrice()<= maxPrice && x.Memory >= minimemory).Select(x=>x.Model).ToList();            
+                return laptops.Where(x => x.GetPrice() <= maxPrice && x.Memory >= minimemory).Select(x => x.Model).ToList();
             }
             getModels(16, 4000000).ForEach(x => Console.WriteLine(x));
             Console.WriteLine("--------------");
-            laptops.OrderByDescending(x=>x.Memory).Select(x=>x.Model).First();
+            laptops.OrderByDescending(x => x.Memory).Select(x => x.Model).First();
             Console.WriteLine(laptops.OrderByDescending(x => x.Memory).Select(x => x.Model).First()
 );
             Console.WriteLine("--------------");
@@ -141,24 +142,112 @@ namespace anisza1054._9._30
             restaurants[0].setRating(8.2);
             // Készíts egy függvényt, amely paraméterként kap egy kategóriát,
             // és visszaadja az adott kategóriába tartozó éttermek Name értékét!
-            List<string> asd(string newCategory) 
+            List<string> asd(string newCategory)
             {
                 return restaurants.Where(x => x.Category == newCategory).Select(x => x.Name).ToList();
             }
             asd("Burger").ForEach(x => Console.WriteLine(x));
             // LINQ segítségével számold meg, hány legalább 9.0 értékelésű étterem található a listában!
-            Console.WriteLine(restaurants.Where(x=>x.Getrating()>= 9.0).Count());
+            Console.WriteLine(restaurants.Where(x => x.Getrating() >= 9.0).Count());
             // LINQ segítségével keresd meg a legdrágább éttermet,
             // és add vissza annak Name értékét!
-            restaurants.OrderByDescending(x => x.p());
+            restaurants.OrderByDescending(x => x.Getprice()).Select(x => x.Name).First();
             // LINQ segítségével add vissza a különböző városok neveit!
             // Egy város csak egyszer szerepeljen az eredményben!
+            restaurants.Select(x => x.City.Distinct()).ToList();
+            Console.WriteLine("--------------");
+            List<Series> series = new List<Series>()
+{
+    new Series("Breaking Bad", "Drama", "AMC" ),
+    new Series("Stranger Things", "SciFi", "Netflix"),
+    new Series("The Boys", "Action", "Amazon"),
+    new Series("Dark", "SciFi", "Netflix"),
+    new Series("The Crown", "Drama", "Netflix")
+};
+
+            series[0].AddEpis(62);
+            series[1].AddEpis(34);
+            series[2].AddEpis(32);
+            series[3].AddEpis(26);
+            series[4].AddEpis(60);
+            series[5].setRating(9.5);
+
+            series[0].setRating(8.7);
+            series[1].setRating(8.8);
+            series[2].setRating(8.6);
+            series[3].setRating(8.1);
+            series[4].setRating(8.5);
+            series[5].setRating(8.4);
+            // Készíts egy függvényt, amely paraméterként kap egy stúdiót,
+            // és visszaadja az adott stúdióhoz tartozó sorozatok Title értékét!
+            List<string> GetTitle(string studio)
+            {
+                return series.Where(x => x.Studio == studio).Select(x => x.Title).ToList();
+            }
+            GetTitle("Netflix").ForEach(x => Console.WriteLine(x));
+            // LINQ segítségével keresd meg a legtöbb epizóddal rendelkező sorozat Title értékét!
+            Console.WriteLine(series.OrderByDescending(x => x.getEpiode()).Select(x => x.Title).First());
+
+            // LINQ segítségével számítsd ki azoknak a sorozatoknak az átlagos értékelését,
+            // amelyek legalább 20 epizódból állnak!
+            series.Where(x => x.getEpiode() > 20).Average(x => x.getRationg());
+            // LINQ segítségével add vissza a különböző műfajokat!
+            // Egy műfaj csak egyszer szerepeljen az eredményben!
+            series.Select(x => x.Genre.Distinct());
+            Console.WriteLine("--------------");
+            List<Product> products = new List<Product>()
+{
+    new Product("Galaxy S24", "Phone", "Samsung"),
+    new Product("iPhone 15", "Phone", "Apple"),
+    new Product("Pixel 8", "Phone", "Google"),
+    new Product("ThinkPad E14", "Laptop", "Lenovo"),
+    new Product("MacBook Air", "Laptop", "Apple"),
+    new Product("ROG Strix", "Laptop", "Asus"),
+    new Product("Galaxy Tab S9", "Tablet", "Samsung"),
+
+};
+            products[0].SetPrice(329000);
+            products[1].SetPrice(349000);
+            products[2].SetPrice(279000);
+            products[3].SetPrice(319000);
+            products[4].SetPrice(489000);
+            products[5].SetPrice(649000);
+            products[6].SetPrice(299000);
+            products[0].AddStock(15);
+            products[1].AddStock(12);
+            products[2].AddStock(8);
+            products[3].AddStock(10);
+            products[4].AddStock(7);
+            products[5].AddStock(5);
+            products[6].AddStock(9);
+            Console.WriteLine("--------------");
             Console.WriteLine("--------------");
 
-            Console.WriteLine("--------------");
-            Console.WriteLine("--------------");
-            Console.WriteLine("--------------");
+            // LINQ segítségével Category szerint csoportosítsd a termékeket,
+            // majd add vissza kategóriánként, hogy hány termék tartozik az adott kategóriához!
+            foreach (KeyValuePair<string, int> x in products.GroupBy(x => x.Category).ToDictionary(x => x.Key, x => x.Count()))
 
+            {
+                Console.WriteLine($"{x.Key} : {x.Value}");
+            }
+            // LINQ segítségével Manufacturer szerint csoportosítsd a termékeket,
+            // majd add vissza gyártónként a termékek átlagos árát!
+            foreach (KeyValuePair<string, double> x in products.GroupBy(x => x.Manufactoring).ToDictionary(x => x.Key, x => x.Average(x => x.getPrice()))) 
+            {
+                Console.WriteLine($"{x.Key} : {x.Value}");
+            }
+            // LINQ segítségével Category szerint csoportosítsd a termékeket,
+            // majd keresd meg minden kategória legdrágább termékének Name értékét!
+            foreach (KeyValuePair<string, string> x in products.GroupBy(x => x.Category).ToDictionary(x => x.Key, x => x.OrderByDescending(y => y.getPrice()).Select(x => x.Name).First()))
+            {
+                Console.WriteLine($"{x.Key} : {x.Value}");
+            }
+
+            // LINQ segítségével keresd meg azt a kategóriát,
+            // amelyhez összesen a legtöbb raktáron lévő termék tartozik!
+            Console.WriteLine(
+                    products.GroupBy(x => x.Category).OrderByDescending(x => x.Sum(x => x.getStock())).ToDictionary(x => x.Key, x => x.Sum(x => x.getStock())).First().Key
+                );
         }
     }
 }

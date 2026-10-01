@@ -33,9 +33,9 @@ namespace anisza1054._9._30
         {
             return _rating;
         }
-        public int G()
+        public int Getprice()
         {
-            return _rating;
+            return _averigePrice;
         }
     }
 }
